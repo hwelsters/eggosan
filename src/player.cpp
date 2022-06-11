@@ -17,9 +17,9 @@ void Player::update(Input &input, int elapsedTime)
 
     if (input.isKeyHeld(SDLK_a) || input.isKeyHeld(SDLK_LEFT))
         this->moveLeft();
-    if (input.isKeyHeld(SDLK_d) || input.isKeyHeld(SDLK_RIGHT))
+    else if (input.isKeyHeld(SDLK_d) || input.isKeyHeld(SDLK_RIGHT))
         this->moveRight();
-    else 
+    else
         this->stopMoving();
 
     handlePhysics(elapsedTime);
@@ -52,6 +52,8 @@ void Player::stopMoving()
     default:
         break;
     }
+
+    this->_xVelocity = 0;
 }
 
 void Player::setupAnimations()
