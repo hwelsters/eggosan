@@ -6,8 +6,6 @@ AnimatedSprite::AnimatedSprite(Graphics &graphics, std::string filePath, Vector2
                                                                                                                                                                   _milisecondsPerFrame(milisecondsPerFrame),
                                                                                                                                                                   _timeElapsed(0)
 {
-    this->setupAnimations();
-    this->playAnimation("eggosan_runLeft");
 }
 
 void AnimatedSprite::update(int timeElapsed)
@@ -24,14 +22,14 @@ void AnimatedSprite::update(int timeElapsed)
 
 void AnimatedSprite::playAnimation(std::string animationName, bool playAnimationOnce)
 {
+    if (this->_animations.count(animationName) == 0)
+    {
+        printf("Animation does not exist!\n");
+        return;
+    }
+
     this->_playAnimationOnce = playAnimationOnce;
     this->_currentAnimation = animationName;
-}
-
-void AnimatedSprite::setupAnimations()
-{
-    this->addAnimation("eggosan_runLeft", 7, Vector2(0, 0), Vector2(32, 32));
-    this->addAnimation("eggosan_runRight", 7, Vector2(0, 32), Vector2(32, 32));
 }
 
 void AnimatedSprite::addAnimation(std::string animationName, int frameCount, Vector2 startPosition, Vector2 size)

@@ -9,6 +9,8 @@ Player::Player(Graphics &graphics, std::string filePath, Vector2 sourcePosition,
     this->_xVelocity = 0;
     this->_yVelocity = 0;
     this->_facingDirection = RIGHT;
+
+    this->setupAnimations();
 }
 
 void Player::update(Input &input, int elapsedTime)
@@ -58,21 +60,21 @@ void Player::stopMoving()
 
 void Player::setupAnimations()
 {
-    this->addAnimation("eggosan_idleLeft", 1, Vector2(0, 0), Vector2(32, 32));
-    this->addAnimation("eggosan_idleRight", 1, Vector2(0, 32), Vector2(32, 32));
+    this->addAnimation("eggosan_idleRight", 1, Vector2(0, 0), Vector2(32, 32));
+    this->addAnimation("eggosan_idleLeft", 1, Vector2(0, 32), Vector2(32, 32));
 
-    this->addAnimation("eggosan_runLeft", 7, Vector2(0, 0), Vector2(32, 32));
-    this->addAnimation("eggosan_runRight", 7, Vector2(0, 32), Vector2(32, 32));
+    this->addAnimation("eggosan_runRight", 7, Vector2(0, 0), Vector2(32, 32));
+    this->addAnimation("eggosan_runLeft", 7, Vector2(0, 32), Vector2(32, 32));
 }
 
 void Player::handlePhysics(int elapsedTime)
 {
-    this->_xDisplacement = this->_xVelocity * elapsedTime;
-    this->_yDisplacement = this->_yVelocity * elapsedTime;
+    this->_xDisplacement += this->_xVelocity * elapsedTime;
+    this->_yDisplacement += this->_yVelocity * elapsedTime;
 
-    this->_position.x += static_cast<int>(this->_xDisplacement);
-    this->_position.y += static_cast<int>(this->_yDisplacement);
+    this->_position.x += (int)(this->_xDisplacement);
+    this->_position.y += (int)(this->_yDisplacement);
 
-    this->_xDisplacement -= static_cast<int>(this->_xDisplacement);
-    this->_yDisplacement -= static_cast<int>(this->_yDisplacement);
+    this->_xDisplacement -= (int)(this->_xDisplacement);
+    this->_yDisplacement -= (int)(this->_yDisplacement);
 }

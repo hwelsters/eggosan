@@ -18,7 +18,7 @@ public:
 
 protected:
     void playAnimation(std::string animationName, bool playAnimationOnce = false);
-    virtual void setupAnimations();
+    virtual void setupAnimations() = 0;
     void addAnimation(std::string animationName, int frameCount, Vector2 startPosition, Vector2 size);
 
 private:
