@@ -4,15 +4,13 @@
 
 #include <string>
 
-namespace globals
+struct RGBA
 {
-    const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 480;
-    
-    const float SPRITE_SCALE = 3.0f;
-
-    const std::string TITLE = "Eggo-san's splendid adventure";
-}
+    int r;
+    int g;
+    int b;
+    int a;
+};
 
 struct Vector2
 {
@@ -21,11 +19,13 @@ struct Vector2
 
     Vector2() : x(0),
                 y(0)
-    {}
+    {
+    }
 
     Vector2(float x, float y) : x(x),
-                            y(y)
-    {}
+                                y(y)
+    {
+    }
 };
 
 enum Direction
@@ -35,5 +35,20 @@ enum Direction
     UP,
     DOWN
 };
+
+namespace globals
+{
+    const int SCREEN_WIDTH = 640;
+    const int SCREEN_HEIGHT = 480;
+
+    const float SPRITE_SCALE = 3.0f;
+
+    const std::string TITLE = "Eggo-san's splendid adventure";
+
+    const std::string TILESET_FILE_PATH = "./assets/sprites/tiles.png";
+    const std::string ACTOR_FILE_PATH = "./assets/sprites/actors.png";
+
+    const RGBA RENDER_DRAW_COLOR = {31, 16, 42, 255};
+}
 
 #endif

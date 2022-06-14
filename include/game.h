@@ -5,6 +5,7 @@
 #include "../include/input.h"
 #include "../include/graphics.h"
 #include "../include/player.h"
+#include "../include/level.h"
 
 class Game
 {
@@ -19,6 +20,7 @@ private:
     Input _input;
 
     Player _player;
+    Level _level;
 };
 
 #endif

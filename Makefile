@@ -1,6 +1,7 @@
 #OBJS specifies which files to compile as part of the project
 OBJS = 				src/main.cpp src/graphics.cpp src/game.cpp src/input.cpp \
-					src/sprite.cpp src/animatedSprite.cpp src/player.cpp
+					src/sprite.cpp src/animatedSprite.cpp src/player.cpp \
+					src/tinyxml2.cpp src/level.cpp
 #CC specifies which compiler we're using
 CC = g++
 
@@ -13,13 +14,13 @@ LIBRARY_PATHS = -LC:\mingw_dev_lib\lib
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
 # -Wl,-subsystem,windows gets rid of the console window
-COMPILER_FLAGS = -g -Wall
+COMPILER_FLAGS = -g -w
 
 #LINKER_FLAGS specifies the libraries we're linking against
 LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
 #OBJ_NAME specifies the name of our exectuable
-OBJ_NAME = build/game
+OBJ_NAME = game
 
 #This is the target that compiles our executable
 all : $(OBJS)

@@ -7,7 +7,7 @@
 
 namespace player_constants
 {
-    const float PLAYER_MOVE_SPEED = 0.25f;
+    const float PLAYER_MOVE_SPEED = 0.15f;
     const float GRAVITY = 1.0f;
 }
 

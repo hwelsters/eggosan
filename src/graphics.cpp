@@ -18,11 +18,15 @@ Graphics::Graphics()
     if (this->_window == NULL)
     {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+        return;
     }
     if (this->_renderer == NULL)
     {
         printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
+        return;
     }
+
+    SDL_SetRenderDrawColor(this->_renderer, globals::RENDER_DRAW_COLOR.r, globals::RENDER_DRAW_COLOR.g, globals::RENDER_DRAW_COLOR.b, globals::RENDER_DRAW_COLOR.a);
 }
 
 Graphics::~Graphics()
