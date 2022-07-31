@@ -40,6 +40,8 @@ void Game::draw()
 {
     this->_graphics.clear();
 
+    this->_level.draw(this->_graphics);
     this->_player.draw(this->_graphics);
+    
     this->_graphics.flip();
 }

@@ -1,4 +1,5 @@
 #include "../include/level.h"
+#include "../include/globals.h"
 #include "../include/tinyxml2.h"
 
 Level::Level() {}
@@ -44,7 +45,53 @@ void Level::loadMap(Graphics &graphics, std::string mapName)
     }
 
     mapElement->QueryIntAttribute("tilewidth", &tileWidth);
-        mapElement->QueryIntAttribute("tileheight", &tileHeight);
-        mapElement->QueryIntAttribute("width", &levelWidth);
-        mapElement->QueryIntAttribute("height", &levelHeight);
+    mapElement->QueryIntAttribute("tileheight", &tileHeight);
+    mapElement->QueryIntAttribute("width", &levelWidth);
+    mapElement->QueryIntAttribute("height", &levelHeight);
+
+    tinyxml2::XMLElement *layerElement = mapElement->FirstChildElement("layer");
+    while (layerElement != nullptr)
+    {
+        tinyxml2::XMLElement *dataElement = layerElement->FirstChildElement("data");
+
+        std::string layerName = layerElement->Attribute("name");
+
+        int cnt = 0;
+        while (dataElement != nullptr)
+        {
+            char *data = (char *)dataElement->GetText();
+            std::vector<Sprite> spriteList;
+
+            char *token = strtok(data, ",");
+            while (token != NULL)
+            {
+                int gid = std::stoi(token);
+
+                if (gid != 0)
+                {
+                    int tilesetX = (gid - 1) % (globals::TILESET_WIDTH / globals::TILE_WIDTH) * globals::TILE_WIDTH ;
+                    int tilesetY = (gid - 1) / (globals::TILESET_WIDTH / globals::TILE_WIDTH) * globals::TILE_WIDTH ;
+
+                    int positionX = (cnt % levelWidth) * globals::TILE_WIDTH * globals::SPRITE_SCALE;
+                    int positionY = (cnt / levelWidth) * globals::TILE_HEIGHT * globals::SPRITE_SCALE;
+
+                    Sprite tileSprite = Sprite(graphics, globals::TILESET_FILE_PATH, Vector2(tilesetX, tilesetY), Vector2(globals::TILE_WIDTH, globals::TILE_HEIGHT), Vector2(positionX, positionY));
+                    spriteList.push_back(std::move(tileSprite));
+                }
+                cnt++;
+                token = strtok(NULL, ",");
+            }
+
+            if (layerName == "background")
+                this->_backgroundTileList = std::move(spriteList);
+            if (layerName == "midground")
+                this->_midgroundTileList = std::move(spriteList);
+            if (layerName == "foreground")
+                this->_foregroundTileList = std::move(spriteList);
+
+            dataElement = dataElement->NextSiblingElement("data");
+        }
+
+        layerElement = layerElement->NextSiblingElement("layer");
+    }
 }

@@ -48,6 +48,12 @@ namespace globals
     const std::string TILESET_FILE_PATH = "./assets/sprites/tiles.png";
     const std::string ACTOR_FILE_PATH = "./assets/sprites/actors.png";
 
+    const int TILE_WIDTH = 16;
+    const int TILE_HEIGHT = 16;
+
+    const int TILESET_WIDTH = 2048;
+    const int TILESET_HEIGHT = 2048;
+
     const RGBA RENDER_DRAW_COLOR = {31, 16, 42, 255};
 }
 
