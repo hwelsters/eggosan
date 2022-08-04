@@ -17,7 +17,7 @@ Game::~Game()
 
 void Game::update()
 {
-    this->_player = Player(this->_graphics, globals::ACTOR_FILE_PATH, Vector2(0, 0), Vector2(32, 32), Vector2(100, 100), 100);
+    this->_player = Player(this->_graphics, globals::ACTOR_FILE_PATH, Vector2(0, 0), Vector2(32, 32), Vector2(668, 668), 100);
 
     // TESTING
     this->_level.loadMap(this->_graphics, "./assets/map/pipe_level1.tmx");

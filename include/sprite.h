@@ -17,6 +17,8 @@ public:
     virtual void update(int elapsedTime);
     void draw(Graphics &graphics);
 
+    void setPosition(Vector2 position);
+
 protected:
     SDL_Rect _sourceRect;
     Vector2 _position;

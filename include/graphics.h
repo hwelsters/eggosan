@@ -23,11 +23,16 @@ public:
     void flip();
     void blitSurface(SDL_Texture *texture, SDL_Rect *sourceRect, SDL_Rect *destinationRect);
 
+    void setPositionX(float positionX);
+    void setPositionY(float positionY);
 private:
     SDL_Window *_window;
     SDL_Renderer *_renderer;
 
     std::unordered_map<std::string, SDL_Texture *> _spriteSheets;
+
+    float _positionX;
+    float _positionY;
 };
 
 #endif

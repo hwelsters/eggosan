@@ -1,6 +1,8 @@
 #include "../include/level.h"
 #include "../include/globals.h"
 #include "../include/tinyxml2.h"
+#include "../include/globals.h"
+#include "../include/rectangle.h"
 
 Level::Level() {}
 Level::~Level() {}
@@ -49,6 +51,7 @@ void Level::loadMap(Graphics &graphics, std::string mapName)
     mapElement->QueryIntAttribute("width", &levelWidth);
     mapElement->QueryIntAttribute("height", &levelHeight);
 
+    // LOADING TILES
     tinyxml2::XMLElement *layerElement = mapElement->FirstChildElement("layer");
     while (layerElement != nullptr)
     {
@@ -93,5 +96,33 @@ void Level::loadMap(Graphics &graphics, std::string mapName)
         }
 
         layerElement = layerElement->NextSiblingElement("layer");
+    }
+
+    // LOAD COLLISION RECTS
+    tinyxml2::XMLElement *objectGroupElement = mapElement->FirstChildElement("objectgroup");
+    while (objectGroupElement != nullptr)
+    {
+        std::string objectGroupName = objectGroupElement->Attribute("name");
+        if (objectGroupName == "collisions")
+        {
+            std::vector<Rectangle> collisionRects;
+            tinyxml2::XMLElement* objectElement = objectGroupElement->FirstChildElement("object");
+            while (objectElement != nullptr)
+            {
+                float positionX, positionY, rectWidth, rectHeight;
+
+                objectElement->QueryFloatAttribute("x", &positionX);
+                objectElement->QueryFloatAttribute("y", &positionY);
+                objectElement->QueryFloatAttribute("width", &rectWidth);
+                objectElement->QueryFloatAttribute("height", &rectHeight);
+
+                collisionRects.push_back(Rectangle(Vector2(positionX, positionY), Vector2(rectWidth, rectHeight)));
+
+                objectElement = objectElement->NextSiblingElement("object");
+            }
+
+            this->_collisionRects = collisionRects;
+        }
+        objectGroupElement = objectGroupElement->NextSiblingElement("objectgroup");
     }
 }

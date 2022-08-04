@@ -23,3 +23,8 @@ void Sprite::draw(Graphics &graphics)
     SDL_Rect destinationRect = {this->_position.x, this->_position.y, (int)(this->_sourceRect.w * globals::SPRITE_SCALE), (int)(this->_sourceRect.h * globals::SPRITE_SCALE)};
     graphics.blitSurface(this->_texture, &this->_sourceRect, &destinationRect);
 }
+
+void Sprite::setPosition(Vector2 position)
+{
+    this->_position = position;
+}

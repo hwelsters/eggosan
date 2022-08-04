@@ -27,6 +27,9 @@ Graphics::Graphics()
     }
 
     SDL_SetRenderDrawColor(this->_renderer, globals::RENDER_DRAW_COLOR.r, globals::RENDER_DRAW_COLOR.g, globals::RENDER_DRAW_COLOR.b, globals::RENDER_DRAW_COLOR.a);
+
+    this->_positionX = 450;
+    this->_positionY = 500;
 }
 
 Graphics::~Graphics()
@@ -82,5 +85,6 @@ void Graphics::flip()
 
 void Graphics::blitSurface(SDL_Texture *texture, SDL_Rect *sourceRect, SDL_Rect *destinationRect)
 {
-    SDL_RenderCopy(this->_renderer, texture, sourceRect, destinationRect);
+    SDL_Rect cameraDestinationRect = {destinationRect->x - this->_positionX, destinationRect->y - this->_positionY, destinationRect->w, destinationRect->h};
+    SDL_RenderCopy(this->_renderer, texture, sourceRect, &cameraDestinationRect);
 }

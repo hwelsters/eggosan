@@ -4,6 +4,7 @@
 
 #include "animatedSprite.h"
 #include "input.h"
+#include "rectangle.h"
 
 namespace player_constants
 {
@@ -17,7 +18,7 @@ public:
     Player();
     Player(Graphics &graphics, std::string filePath, Vector2 sourcePosition, Vector2 sourceSize, Vector2 position, int milisecondsPerFrame);
 
-    virtual void update( Input& input, int elapsedTime);
+    virtual void update(Input &input, int elapsedTime);
 
     void moveLeft();
     void moveRight();
@@ -34,6 +35,7 @@ protected:
     float _yDisplacement;
 
     Direction _facingDirection;
+    Rectangle _collisionRect;
 };
 
 #endif

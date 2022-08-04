@@ -14,8 +14,8 @@ struct RGBA
 
 struct Vector2
 {
-    int x;
-    int y;
+    float x;
+    float y;
 
     Vector2() : x(0),
                 y(0)
@@ -33,7 +33,8 @@ enum Direction
     LEFT,
     RIGHT,
     UP,
-    DOWN
+    DOWN,
+    NONE
 };
 
 namespace globals
