@@ -1,9 +1,7 @@
 #pragma once
 #ifndef INPUT_H
 #define INPUT_H
-
 #include <SDL.h>
-
 #include <unordered_map>
 
 class Input

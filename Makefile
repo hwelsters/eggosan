@@ -1,12 +1,14 @@
+SRC_DIR = src
+INCLUDE_DIR = ./include
+SRC_FILES = $(wildcard **/*.cpp)
+
 #OBJS specifies which files to compile as part of the project
-OBJS = 				src/main.cpp src/graphics.cpp src/game.cpp src/input.cpp \
-					src/sprite.cpp src/animatedSprite.cpp src/player.cpp \
-					src/tinyxml2.cpp src/level.cpp src/rectangle.cpp
+OBJS = 	$(SRC_FILES)
 #CC specifies which compiler we're using
 CC = g++
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
-INCLUDE_PATHS = -IC:\mingw_dev_lib\include\SDL2
+INCLUDE_PATHS = -IC:\mingw_dev_lib\include
 
 #LIBRARY_PATHS specifies the additional library paths we'll need
 LIBRARY_PATHS = -LC:\mingw_dev_lib\lib
